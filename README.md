@@ -14,7 +14,9 @@ This project's objectives are to write a very basic text editor using the Swing 
 ``` 
 Stage1: Place the first component in the frame, a JTextArea. 
 ```
-
+``` 
+Stage2: Add two buttons and their functionality, to load text from a file and to save the text in the TextArea to a file. 
+```
 
 
 ## Dependencies/ Environment
