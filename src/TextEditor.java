@@ -1,22 +1,34 @@
+
 import javax.swing.*;
 import java.awt.*;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class TextEditor extends JFrame { //implements DocumentListener {
+public class TextEditor extends JFrame {
 
-    private String stageTitle = "The first stage";
-    private String textAreaName = "TextArea";
     private JScrollPane areaScrollPane;
     private JTextArea textArea;
     private JTextField textField;
-    private BorderLayout borderLayout;
-    JPanel optionsPanel;
+    private JPanel optionsPanel;
     private JButton saveFileB;
     private JButton openFileB;
+    private BorderLayout borderLayout;
+
+    private String stageTitle = "The third stage";
+    private String nameTextArea = "TextArea";
+    private String nameTextField = "FilenameField";
+    private String nameButtonSave = "SaveButton";
+    private String nameButtonLoad = "LoadButton";
+    private String nameScrollPane = "ScrollPane";
+    private String nameMenuTabFile = "MenuFile";
+    private String nameMenuItemLoad = "MenuLoad";
+    private String nameMenuItemSave = "MenuSave";
+    private String nameMenuItemExit = "MenuExit";
+
 
     private int frameH = 550;
     private int frameW = 400;
@@ -37,19 +49,19 @@ public class TextEditor extends JFrame { //implements DocumentListener {
         initTextArea();
         optionsPanel = new JPanel();
         initOptionsPanel();
+        initMenuBar();
     }
 
     public void initTextArea(){
-
         textArea = new JTextArea();
-        textArea.setName(textAreaName);
+        textArea.setName(nameTextArea);
         textArea.setMargin(new Insets(10,10,10,10));
         textArea.setBounds(10,45,frameW - 20,frameH - 20);
         textArea.setLineWrap(false);
         textArea.setWrapStyleWord(true);
 
         areaScrollPane = new JScrollPane(textArea);
-        areaScrollPane.setName("ScrollPane");
+        areaScrollPane.setName(nameScrollPane);
         areaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         areaScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         areaScrollPane.setBorder(
@@ -77,9 +89,9 @@ public class TextEditor extends JFrame { //implements DocumentListener {
         saveFileB = new JButton("Save");
         openFileB = new JButton("Load");
 
-        textField.setName("FilenameField");
-        saveFileB.setName("SaveButton");
-        openFileB.setName("LoadButton");
+        textField.setName(nameTextField);
+        saveFileB.setName(nameButtonSave);
+        openFileB.setName(nameButtonLoad);
 
         saveFileB.addActionListener(saveFileListener);
         openFileB.addActionListener(openFileListener);
@@ -124,4 +136,36 @@ public class TextEditor extends JFrame { //implements DocumentListener {
 
         }
     };
+
+    ActionListener exitListener = (actionEvent) -> {
+        dispose();
+        //System.exit(0);
+    };
+    
+    public void initMenuBar(){
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        JMenu fileMenu = new JMenu("File");
+        fileMenu.setName(nameMenuTabFile);
+        fileMenu.setMnemonic(KeyEvent.VK_F);
+        menuBar.add(fileMenu);
+
+
+        JMenuItem loadMenuItem = new JMenuItem("Load");
+        JMenuItem saveMenuItem = new JMenuItem("Save");
+        JMenuItem exitMenuItem = new JMenuItem("Exit");
+
+        loadMenuItem.setName(nameMenuItemLoad);
+        saveMenuItem.setName(nameMenuItemSave);
+        exitMenuItem.setName(nameMenuItemExit);
+
+        loadMenuItem.addActionListener(openFileListener);
+        saveMenuItem.addActionListener(saveFileListener);
+        exitMenuItem.addActionListener(exitListener);
+
+        fileMenu.add(loadMenuItem);
+        fileMenu.add(saveMenuItem);
+        fileMenu.addSeparator();
+        fileMenu.add(exitMenuItem);
+    }
 }

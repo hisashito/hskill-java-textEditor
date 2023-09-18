@@ -17,6 +17,9 @@ Stage1: Place the first component in the frame, a JTextArea.
 ``` 
 Stage2: Add two buttons and their functionality, to load and to save text from/to a file. !!! it does it with respect to what is considered the root folder of the project.
 ```
+``` 
+Stage3: Add a menuBar, which lists menu items that duplicate the function of the buttons to load and to save text from/to a file and also includes a menu item ´Exit´ that terminates the application. 
+```
 
 
 ## Dependencies/ Environment
